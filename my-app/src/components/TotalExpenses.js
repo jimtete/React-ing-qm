@@ -1,30 +1,31 @@
 import ExpenseItem from "./ExpenseItem";
+import Card from "./Card";
 import './TotalExpenses.css'
 
 function TotalExpenses(args) {
   return (
-    <div className="expenses">
+    <Card className="expenses">
       <ExpenseItem
-        title={args.data[0].title}
-        amount={args.data[0].amount}
-        date={args.data[0].date}
+        title={args.items[0].title}
+        amount={args.items[0].amount}
+        date={args.items[0].date}
       ></ExpenseItem>
       <ExpenseItem
-        title={args.data[1].title}
-        amount={args.data[1].amount}
-        date={args.data[1].date}
+        title={args.items[1].title}
+        amount={args.items[1].amount}
+        date={args.items[1].date}
       ></ExpenseItem>
       <ExpenseItem
-        title={args.data[2].title}
-        amount={args.data[2].amount}
-        date={args.data[2].date}
+        title={args.items[2].title}
+        amount={args.items[2].amount}
+        date={args.items[2].date}
       ></ExpenseItem>
       <ExpenseItem
-        title={args.data[3].title}
-        amount={args.data[3].amount}
-        date={args.data[3].date}
+        title={args.items[3].title}
+        amount={args.items[3].amount}
+        date={args.items[3].date}
       ></ExpenseItem>
-    </div>
+    </Card>
   );
 }
 
