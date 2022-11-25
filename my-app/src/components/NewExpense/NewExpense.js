@@ -14,21 +14,24 @@ function NewExpense(args) {
     args.onAddExpense(expenseData);
   }
 
-  function saveButtonClickedHandler(state){
+  function saveButtonClickedHandler(state) {
     setButtonClicked(state);
   }
 
   if (buttonClicked == 0) {
     return (
       <div className="new-expense">
-        <NewExpenseButton onButtonClicked={saveButtonClickedHandler}/>
+        <NewExpenseButton onButtonClicked={saveButtonClickedHandler} />
       </div>
     );
   }
 
   return (
     <div className="new-expense">
-      <ExpenseForm onButtonClicked={saveButtonClickedHandler} onSaveExpenseData={saveExpenseDataHandler} />
+      <ExpenseForm
+        onButtonClicked={saveButtonClickedHandler}
+        onSaveExpenseData={saveExpenseDataHandler}
+      />
     </div>
   );
 }
