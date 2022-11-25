@@ -38,8 +38,13 @@ function ExpenseForm(args) {
     // });
   }
 
+  function buttonCancelClickedHandler(event) {
+    args.onButtonClicked(0);
+  }
+
   function submitHandler(event) {
     event.preventDefault();
+    args.onButtonClicked(0);
 
     const expenseData = {
       title: enteredTitle,
@@ -48,9 +53,9 @@ function ExpenseForm(args) {
     };
 
     args.onSaveExpenseData(expenseData);
-    setEnteredTitle('');
-    setEnteredAmount('');
-    setEnteredDate('');
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
   }
 
   return (
@@ -86,6 +91,7 @@ function ExpenseForm(args) {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button onClick={buttonCancelClickedHandler} type="cancel">Cancel</button>
         <button type="submit">Add expense</button>
       </div>
     </form>
