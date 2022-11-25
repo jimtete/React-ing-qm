@@ -11,14 +11,16 @@ function ExpenseItem(args) {
   }
 
   return (
-    <Card className="expense-item">
-      <ExpenseDate date={args.date} />
-      <div className="expense-item__description">
-        <h2>{title}</h2>
-        <div className="expense-item__price">{args.amount}$</div>
-      </div>
-      <button onClick={clickHandler}>CHange title</button>
-    </Card>
+    <li>
+      <Card className="expense-item">
+        <ExpenseDate date={args.date} />
+        <div className="expense-item__description">
+          <h2>{title}</h2>
+          <div className="expense-item__price">{args.amount}$</div>
+        </div>
+        <button onClick={clickHandler}>CHange title</button>
+      </Card>
+    </li>
   );
 }
 
