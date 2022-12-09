@@ -10,7 +10,6 @@ function App() {
   }
 
   const [showParagraph, setShowParagraph] = useState(false);
-  console.log('APP RUNNING');
 
   return (
     <div className="app">
