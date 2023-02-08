@@ -5,3 +5,5 @@
 14-starting-project/node_modules/*
 14-starting-project/node_modules/.bin/detective
 14-starting-project/node_modules/
+15-starting-project/backend/node_modules/.bin/detective
+15-starting-project/frontend/node_modules/
