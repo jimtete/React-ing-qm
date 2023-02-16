@@ -1,53 +1,68 @@
-import MeetupDetail from "../../components/meetups/MeetupDetail";
+import { MongoClient, ObjectId } from 'mongodb';
 
-function MeetupDetails() {
+import MeetupDetail from '../../components/meetups/MeetupDetail';
+
+function MeetupDetails(props) {
   return (
     <MeetupDetail
-      image="http://lovefromtuscany.com/wp-content/uploads/2017/11/cathedral-3413230_1280-1024x682.jpg"
-      title="First meetup"
-      address="Some street"
-      description="Some description for first meetup"
+      image={props.meetupData.image}
+      title={props.meetupData.title}
+      address={props.meetupData.address}
+      description={props.meetupData.description}
     />
   );
 }
 
 export async function getStaticPaths() {
+  const client = await MongoClient.connect(
+    "mongodb+srv://jimtete:lmZHjkIAkW3oEGKH@cluster0.ggdzwqm.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find({}, { _id: true }).toArray();
+
+  client.close();
+
   return {
     fallback: false,
-    paths: [
-      {
-        params: {
-          meetupId: "m1",
-        },
+    paths: meetups.map((m) => ({
+      params: {
+        meetupId: m._id.toString(),
       },
-      {
-        params: {
-          meetupId: "m2",
-        },
-      },
-    ],
+    })),
   };
 }
 
 export async function getStaticProps(context) {
-  // fetch data for a single meetup
-
   const meetupId = context.params.meetupId;
 
-  console.log(meetupId);
+  const client = await MongoClient.connect(
+    "mongodb+srv://jimtete:lmZHjkIAkW3oEGKH@cluster0.ggdzwqm.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection('meetups');
+
+  const selectedMeetup = await meetupsCollection.findOne({
+    _id: new ObjectId(meetupId),
+  });
+
+  client.close();
 
   return {
     props: {
       meetupData: {
-        image:
-          "http://lovefromtuscany.com/wp-content/uploads/2017/11/cathedral-3413230_1280-1024x682.jpg",
-        id: meetupId,
-        title: "First meetup",
-        address: "Some street",
-        description: "Some description for first meetup",
+        id: selectedMeetup._id.toString(),
+        title: selectedMeetup.title,
+        address: selectedMeetup.address,
+        image: selectedMeetup.image,
+        description: selectedMeetup.description,
       },
     },
   };
 }
 
 export default MeetupDetails;
+
