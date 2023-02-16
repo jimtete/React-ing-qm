@@ -1,15 +1,21 @@
-import { MongoClient, ObjectId } from 'mongodb';
-
-import MeetupDetail from '../../components/meetups/MeetupDetail';
+import { MongoClient, ObjectId } from "mongodb";
+import Head from "next/head";
+import MeetupDetail from "../../components/meetups/MeetupDetail";
 
 function MeetupDetails(props) {
   return (
-    <MeetupDetail
-      image={props.meetupData.image}
-      title={props.meetupData.title}
-      address={props.meetupData.address}
-      description={props.meetupData.description}
-    />
+    <>
+      <Head>
+        <title>{props.meetupData.title}</title>
+        <meta name="description" content={props.meetupData.description} />
+      </Head>
+      <MeetupDetail
+        image={props.meetupData.image}
+        title={props.meetupData.title}
+        address={props.meetupData.address}
+        description={props.meetupData.description}
+      />
+    </>
   );
 }
 
@@ -43,7 +49,7 @@ export async function getStaticProps(context) {
   );
   const db = client.db();
 
-  const meetupsCollection = db.collection('meetups');
+  const meetupsCollection = db.collection("meetups");
 
   const selectedMeetup = await meetupsCollection.findOne({
     _id: new ObjectId(meetupId),
@@ -65,4 +71,3 @@ export async function getStaticProps(context) {
 }
 
 export default MeetupDetails;
-
