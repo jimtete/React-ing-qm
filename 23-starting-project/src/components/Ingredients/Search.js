@@ -13,7 +13,8 @@ const Search = React.memo((props) => {
         ? ""
         : `?orderBy="title"&equalTo="${enteredFilter}"`;
     fetch(
-      "https://react-http-c318b-default-rtdb.europe-west1.firebasedatabase.app/ingredients.json",
+      "https://react-http-c318b-default-rtdb.europe-west1.firebasedatabase.app/ingredients.json" +
+        query,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -29,7 +30,7 @@ const Search = React.memo((props) => {
             amount: responseData[key].amount,
           });
         }
-        //onLoadIngredients(loadedIngredients);
+        onLoadIngredients(loadedIngredients);
       });
   }, [enteredFilter, onLoadIngredients]);
   return (

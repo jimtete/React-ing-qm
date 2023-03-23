@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
@@ -29,9 +29,9 @@ const Ingredients = () => {
       });
   }, []);
 
-  const filteredIngredientsHandler = (filteredIngredients) => {
+  const filteredIngredientsHandler = useCallback((filteredIngredients) => {
     setIngredients(filteredIngredients);
-  };
+  }, []);
 
   const addIngredientHandler = (ingredient) => {
     fetch(
